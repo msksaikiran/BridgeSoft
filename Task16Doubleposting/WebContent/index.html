@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>registration Form</title>
+<script>
+function ValidateEmail()
+{
+if(inputText.value.match(mailformat))
+{
+document.form1.text1.focus();
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");
+document.form1.text1.focus();
+return false;
+}
+}
+
+
+function check() 
+{ 
+ var passw= document.getElementById("pass").value;
+ var maill= document.getElementById("mail").value;
+if((/[a-z]/.test(passw) && /\d/.test(passw) && passw.length >= 8) && (passw.length <= 15)&&(/@/.test(maill)))
+{ 
+alert('Registration success')
+return true;
+}
+else
+{ 
+alert('Ensure proper MailId &&& password must contain at least 8 characters and a lower case')
+return false;
+}
+}
+</script>
+</head>
+<body>
+	<h1>
+		<p style="text-align: center;"> Registration</p>
+	</h1>
+	<form action="registration" method="post">
+		<table align="center">
+			<tr>
+				<td>Email</td>
+				<td>:</td>
+				<td><input type="text"  placeholder="Enter Email ID here"  name="email" id="mail"  required/></td>
+			</tr>
+			
+			<tr>
+				<td>Password</td>
+				<td>:</td>
+				<td><input type="text" placeholder="Enter Password here" name="password" id="pass" required>
+				</td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td></td>
+				<td colspan="2"><input type="submit" value="register" onclick = "check()" required/></td>
+				
+			</tr>
+		</table>
+	</form>
+	</body>
+	</html>
