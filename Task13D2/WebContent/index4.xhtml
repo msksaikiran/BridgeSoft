@@ -1,0 +1,188 @@
+ b   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<style>
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+   }
+
+.slider {
+  padding: 3px;
+  padding-top: 5px;
+  position: absolute;
+  cursor: pointer;
+  top: 1px;
+  left: 0;
+  right: 5px;
+  bottom: 8px;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  }
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 26px;
+  left: 3px;
+  bottom: 2px;
+  background-color: blue;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/* input:checked + .slider {
+  background-color: #2196F3;
+} */
+
+/* input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+} */
+
+ input:checked + .slider:before {
+  /* -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px); */
+  transform: translateX(26px);
+} 
+
+/* Rounded sliders */
+ .slider.round {
+  border-radius: 34px;
+} 
+
+ .slider.round:before {
+  border-radius: 50%;
+} 
+	.panel1{
+	style="padding: 4px;
+	background-color: #fffffff2; 
+	max-width: 78%; 
+	margin-left: 111px;
+	margin:50px;
+	margin-left: 109px;
+	}
+	.panel2{
+	padding: 12px; 
+	max-width: 78%; 
+	margin-left: 111px;
+	margin:-56px;
+	margin-left: 98px;
+	}
+    .field{
+     border-radius: 5px;
+     height: 19px; 
+     border-style: solid;
+    }
+    .field1{
+     border-radius: 5px;
+     height: 19px; 
+     border-style: solid;
+     margin-left:60px;
+    }
+    .input{
+    margin: -2px;
+    height: 11px;
+    border: hidden;
+    width: 296px;
+    }
+    </style>
+ 
+</h:head>
+
+<h:body style="background:#c7c4c46e; ">
+	<h:form>
+           <div style="margin-left: 111px;margin:45px;font-size:x-large">
+		          <font color="blue">Manage Identity</font>
+		    </div>
+			<div class="panel1">
+			<p:panel id="Panel" style="border-color: white;">
+				
+					<h:selectOneMenu style="margin: 6px;width: 200px;" value="#{user.item}">Select the Type of Bulk Upload
+						<f:selectItem itemValue="Select" itemLabel="Select" />
+						<f:selectItem itemValue="LCEExection" itemLabel="Create Identity" />
+						<f:selectItem itemValue="List" itemLabel="Manage identity" />
+						<p:ajax listener="#{user.verify}" update="LCE" />
+					</h:selectOneMenu>
+				
+			</p:panel>
+			</div>
+			
+			<div class="panel2"> 
+			<p:panel id="LCE" visible="#{user.flag}" style="border-color: white;">
+			<div style="color: Blue; font-size: large;">Create Identity-Bulk</div>
+			 <div style="color: Black; font-size: xx-small;">Fields marked with <font color="red">'*'</font> are mandatory</div>
+				 <table>
+					<tr>
+						<td>
+						   <fieldset class="field">
+						   <legend>Type<font color="red">*</font></legend>
+						   <h:inputText class="input" id="type"  value="#{user.type}" required="true" label="Type" placeholder="enter the type"></h:inputText>
+						   </fieldset> 
+						</td>
+					</tr>
+					<h:message for="type" style="color:red;font-size:x-small;" />
+					<tr>
+						<td>
+						   <fieldset class="field">
+						   <legend>password<font color="red">*</font></legend>
+						   <h:inputSecret class="input" id="password" value="#{user.password}" required="true" label="password"></h:inputSecret>
+						   </fieldset>
+						</td>
+				
+						<td>
+						   <fieldset class="field1">
+						   <legend>Report Name<font color="red">*</font></legend>
+						   <h:inputText class="input" id="report" value="#{user.report}" required="true" label="ReportName"></h:inputText>
+						   </fieldset>
+						</td>
+					</tr>
+				</table> 
+			
+			<h:message for="password"  style="color:red;font-size:x-small;margin-left: 80px;"/>
+			<h:message for="report" style="color:red;font-size:x-small;margin-left: 220px;" />
+			
+			<div style="margin-top: 43px;">
+			Enable Email Configure:
+			<label class="switch">
+            <h:selectBooleanCheckbox value="#{user.checkbox}" ></h:selectBooleanCheckbox>
+            <span class="slider round" style="font-size:small;background-color:darkblue;color: #e6e5e5;">.No..Yes</span>
+            </label>
+            
+			</div>
+			<div style="margin-left: 356px;margin-top: -32px;">
+			 Upload File:<p:fileUpload value="#{file2}" mode="simple"></p:fileUpload>
+			</div>
+			<div style="font-size:x-small;margin-top: 50px;">
+			Note:please note that specifying the duplicate user in multiple records in csv bulk load file may lead to identity locking issue in sailpoint.
+			No column in the csv should be left blank.If Required specify as 'NA'.
+	        </div>
+			</p:panel>
+			 </div> 
+			<div style="padding: 12px; background-color: #fffffff2; width: 24%;border-radius: 10px;margin:87px;margin-left: 329px;">
+				<table>
+					<tr>
+						<td><h:commandButton style="background-color: #1063f9ba;width: 57px;border-radius: 5px;" value="Save" action="result"></h:commandButton></td>
+						<td><h:commandButton style="background-color: #1063f9ba;width: 57px;border-radius: 5px;" value="Save&Execute;"></h:commandButton></td>
+						<td><h:commandButton style="width: 57px;border-radius: 5px;" value="cancle" ></h:commandButton></td>
+						<td><h:commandButton style="width: 57px;border-radius: 5px;" value="Rest" action="index4"></h:commandButton></td>
+
+					</tr>
+				</table>
+			</div>
+			
+	</h:form>
+</h:body>
+
+</html>
+

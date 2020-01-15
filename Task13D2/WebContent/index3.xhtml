@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<head>
+<title>JSF Tutorial!</title>
+</head>
+
+<h:body style="background-color: #9e9e9e40">
+
+
+	<h:form>
+	  <p:panel id="Panel1" style="border-color: white;">
+
+		 <div style="margin-left: 111px;margin:45px;font-size:x-large">
+		 <font color="blue">Manage Identity</font>
+		 </div>
+		 <div style="padding: 12px; background-color: #fffffff2; max-width: 76%; margin-left: 111px;margin:50px;margin-left: 98px;">
+		 <h:selectOneMenu style="margin: 6px;width: 200px;"
+						value="#{user.item}">Select the Type of Bulk Upload
+						<f:selectItem itemValue="Select" itemLabel="Select" />
+						<f:selectItem itemValue="Create Identity" itemLabel="Create Identity" />
+						<f:selectItem itemValue="List" itemLabel="Manage Identity" />
+						<!-- <p:ajax listener="#{user.verify}" update="LCE" /> -->
+						<p:ajax listener="#{veri}" update="LCE" />
+		</h:selectOneMenu>
+		  </div>
+	   </p:panel>
+		<p:panel id="LCE" visible="#{user.flag}" style="border-color: white;">
+			 <div style="padding: 12px; background-color: #fffffff2; max-width: 76%; margin-left: 111px;margin:-45px;margin-left: 98px;">
+			 <div style="color: Blue; font-size: large;">Create Identity-Bulk</div>
+			 <div style="color: Black; font-size: xx-small;">Fields marked with <font color="red">'*'</font> are mandatory</div>
+			 
+				 <table>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr>
+					
+						<td>Type<font color="red">*</font>:</td>
+						<td><h:inputText style="margin: 6px;width: 239px;" id="text"
+								value="#{userData.name}" required="true"></h:inputText></td>
+					</tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr>
+						<td>password<font color="red">*</font>:</td>
+						<td><h:inputText style="margin: 6px;width: 239px;" id="text2"
+								value="#{password}" required="true">&nbsp;&nbsp;&nbsp;&nbsp;</h:inputText></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Report Name<font color="red">*</font>:</td>
+						<td><h:inputText style="margin: 6px;width: 239px;" id="text3"
+								value="#{reportname}" /></td>
+					</tr>
+				</table> 
+			</div> 
+			<div
+				style="padding: 12px; background-color: #fffffff2; width: 22%;margin: 123px;margin-left: 329px;">
+
+				<table>
+
+					<tr>
+						<td><h:commandButton value="Save"></h:commandButton></td>
+						<td><h:commandButton value="Save&Execute;"></h:commandButton></td>
+						<td><h:commandButton value="cancle"></h:commandButton></td>
+						<td><h:commandButton value="Rest"></h:commandButton></td>
+
+					</tr>
+
+				</table>
+			</div>
+		</p:panel>
+	</h:form>
+
+
+</h:body>
+</html>
